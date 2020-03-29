@@ -1,0 +1,33 @@
+{
+    // ==================== code runner ========================
+    // Set the executor of each language.
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "java": "cd $dir && javac -encoding utf-8 $fileName && java Solution",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "python -u",
+        "perl": "perl",
+    },
+    "code-runner.runInTerminal": true,
+    // ==========================================================
+
+    // ====================== leetcode ==========================
+    "leetcode.defaultLanguage": "java",
+    "leetcode.filePath": {
+        "default": {
+            "folder": "${difficulty}",
+            "filename": "${id}.${kebab-case-name}.${ext}"
+        }
+    },
+    "leetcode.workspaceFolder": "/Users/x/codes/leetcode-zh",
+    "leetcode.hint.configWebviewMarkdown": false,
+    "leetcode.hint.commentDescription": false,
+    "leetcode.showCommentDescription": true,
+    "leetcode.hint.commandShortcut": false,
+    "leetcode.endpoint": "leetcode-cn",
+    // ==========================================================
+    
+}
