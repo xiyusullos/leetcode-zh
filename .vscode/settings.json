@@ -18,8 +18,8 @@
     "leetcode.defaultLanguage": "java",
     "leetcode.filePath": {
         "default": {
-            "folder": "${difficulty}",
-            "filename": "${id}.${kebab-case-name}.${ext}"
+            "folder": "${difficulty}/${id}.${kebab-case-name}",
+            "filename": "Solution.${ext}"
         }
     },
     "leetcode.workspaceFolder": "/Users/x/codes/leetcode-zh",
