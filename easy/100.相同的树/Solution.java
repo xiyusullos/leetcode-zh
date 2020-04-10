@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-09 08:55:26
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-09 10:14:15
+ * @LastEditTime: 2020-04-09 10:20:27
  * @FilePath: /leetcode-zh/easy/100.相同的树/Solution.java
  */
 
@@ -63,8 +63,13 @@ import java.util.Queue;
 
 // @lc code=start
 /**
- * Definition for a binary tree node. public class TreeNode { int val; TreeNode
- * left; TreeNode right; TreeNode(int x) { val = x; } }
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
