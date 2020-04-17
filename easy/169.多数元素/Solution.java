@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-17 11:27:53
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-17 12:02:37
+ * @LastEditTime: 2020-04-17 12:26:51
  * @FilePath: /leetcode-zh/easy/169.多数元素/Solution.java
  */
 import java.util.HashMap;
@@ -62,28 +62,64 @@ class Solution {
     //     return nums[0];
     // }
 
+    // // Boyer-Moore 投票算法
+    // public int majorityElement(int[] nums) {
+    //     // int count = 0;
+    //     int vote = 0;
+    //     Integer candidate = null;
+
+    //     for (int num : nums) {
+    //         if (vote == 0) {
+    //             candidate = num;
+    //         }
+    //         if (num == candidate) {
+    //             vote += 1;
+    //         } else {
+    //             vote -= 1;
+    //         }
+    //     }
+
+    //     return candidate;
+    // }
+
+    // 最快的答案
+    // 递归 比 迭代 快？？？
     public int majorityElement(int[] nums) {
-        // int count = 0;
-        int vote = 0;
-        Integer candidate = null;
-
-        for (int num : nums) {
-            if (vote == 0) {
-                candidate = num;
-            }
-            if (num == candidate) {
-                vote += 1;
-            } else {
-                vote -= 1;
-            }
+        return backtrack(nums, nums[0], 0);
+    }
+    private int backtrack(int[] nums, int curr, int start){
+        int count = 1;
+        for(int i = start; i < nums.length; i++){
+            if(nums[i] == curr)
+                count++;
+            else
+                count--;
+            if(count == 0)
+                return backtrack(nums, nums[i], i + 1);
         }
+        return curr;
+    }
 
-        return candidate;
+    public static void main(String[] args) {
+        new Solution().majorityElement(new int[]{1,0,2,0,3,0,4,0});
     }
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 46/46 cases passed (16 ms)
 // Your runtime beats 33.61 % of java submissions
 // Your memory usage beats 5.71 % of java submissions (45.1 MB)
+
+// Boyer-Moore 投票算法
+// Accepted
+// 46/46 cases passed (3 ms)
+// Your runtime beats 53.84 % of java submissions
+// Your memory usage beats 5.71 % of java submissions (43.1 MB)
+
+// 最快的答案
+// Accepted
+// 46/46 cases passed (0 ms)
+// Your runtime beats 100 % of java submissions
+// Your memory usage beats 5.71 % of java submissions (42.9 MB)
