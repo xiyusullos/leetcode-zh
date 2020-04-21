@@ -5,7 +5,7 @@ import java.util.List;
  * @Author: aponder
  * @Date: 2020-04-21 10:35:09
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-21 11:25:48
+ * @LastEditTime: 2020-04-21 11:35:34
  * @FilePath: /leetcode-zh/medium/1248.统计「优美子数组」/Solution.java
  */
 /*
@@ -71,7 +71,7 @@ class Solution {
 
         int length = nums.length;
         int countOdd = 0;
-        List<Integer> evens = new ArrayList<>();
+        List<Integer> evens = new ArrayList<>(length);
         int countContinuousEven = 0;
         for (int i = 0; i < length; i++) {
             if (nums[i] % 2 == 0) {
