@@ -5,7 +5,7 @@ import java.util.List;
  * @Author: aponder
  * @Date: 2020-04-21 10:35:09
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-21 11:35:34
+ * @LastEditTime: 2020-04-21 11:39:32
  * @FilePath: /leetcode-zh/medium/1248.统计「优美子数组」/Solution.java
  */
 /*
@@ -74,7 +74,7 @@ class Solution {
         List<Integer> evens = new ArrayList<>(length);
         int countContinuousEven = 0;
         for (int i = 0; i < length; i++) {
-            if (nums[i] % 2 == 0) {
+            if ((nums[i] & 1) == 0) {
                 countContinuousEven++;
             } else {
                 countOdd++;
@@ -111,6 +111,6 @@ class Solution {
 // @lc code=end
 
 // Accepted
-// 38/38 cases passed (15 ms)
-// Your runtime beats 48.84 % of java submissions
-// Your memory usage beats 100 % of java submissions (48.4 MB)
+// 38/38 cases passed (9 ms)
+// Your runtime beats 68.6 % of java submissions
+// Your memory usage beats 100 % of java submissions (48.3 MB)
