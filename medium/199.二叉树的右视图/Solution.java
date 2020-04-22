@@ -2,11 +2,14 @@
  * @Author: aponder
  * @Date: 2020-04-22 23:12:07
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-22 23:44:07
+ * @LastEditTime: 2020-04-22 23:47:42
  * @FilePath: /leetcode-zh/medium/199.二叉树的右视图/Solution.java
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+
+import javax.swing.tree.TreeNode;
 
 /*
  * @lc app=leetcode.cn id=199 lang=java
@@ -83,21 +86,21 @@ class Solution {
         TreeNode p, lastP = root;
         int h = 0; // tree height
         int lastH = 1;
-        q1.offer(root);
-        q2.offer(1);
+        q1.add(root);
+        q2.add(1);
         while (!q1.isEmpty()) {
-            p = q1.poll();
-            h = q2.poll();
+            p = q1.remove();
+            h = q2.remove();
 
             if (p == null) break;
 
             if (p.left != null) {
-                q1.offer(p.left);
-                q2.offer(h + 1);
+                q1.add(p.left);
+                q2.add(h + 1);
             }
             if (p.right != null) {
-                q1.offer(p.right);
-                q2.offer(h + 1);
+                q1.add(p.right);
+                q2.add(h + 1);
             }
             if (h != lastH) {
                 l.add(lastP.val);
