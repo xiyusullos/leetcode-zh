@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-22 12:24:19
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-22 23:08:30
+ * @LastEditTime: 2020-04-22 23:50:26
  * @FilePath: /leetcode-zh/easy/204.计数质数/Solution.java
  */
 /*
@@ -59,3 +59,8 @@ class Solution {
     }
 }
 // @lc code=end
+
+// Accepted
+// 20/20 cases passed (16 ms)
+// Your runtime beats 80.56 % of java submissions
+// Your memory usage beats 8.57 % of java submissions (38.3 MB)
