@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-23 12:42:14
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-23 12:45:10
+ * @LastEditTime: 2020-04-23 12:48:44
  * @FilePath: /leetcode-zh/easy/217.存在重复元素/Solution.java
  */
 import java.util.HashSet;
@@ -48,6 +48,7 @@ import java.util.Set;
 
 // @lc code=start
 class Solution {
+    // 方法 1
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int i : nums) {
@@ -55,6 +56,16 @@ class Solution {
         }
         return nums.length != set.size();
     }
+
+    // 方法 2
+    // public boolean containsDuplicate(int[] nums) {
+    //     Set<Integer> set = new HashSet<>();
+    //     for (int i : nums) {
+    //         if (set.contains(i)) return true;
+    //         set.add(i);
+    //     }
+    //     return false;
+    // }
 }
 // @lc code=end
 
@@ -62,3 +73,8 @@ class Solution {
 // 18/18 cases passed (7 ms)
 // Your runtime beats 72.58 % of java submissions
 // Your memory usage beats 6.98 % of java submissions (47.4 MB)
+
+// Accepted
+// 18/18 cases passed (9 ms)
+// Your runtime beats 63.36 % of java submissions
+// Your memory usage beats 6.98 % of java submissions (45.7 MB)
