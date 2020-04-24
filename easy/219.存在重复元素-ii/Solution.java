@@ -2,13 +2,15 @@
  * @Author: aponder
  * @Date: 2020-04-24 11:11:14
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-24 11:18:31
+ * @LastEditTime: 2020-04-24 11:27:25
  * @FilePath: /leetcode-zh/easy/219.存在重复元素-ii/Solution.java
  */
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /*
  * @lc app=leetcode.cn id=219 lang=java
@@ -49,28 +51,47 @@ import java.util.Map;
 
 // @lc code=start
 class Solution {
-    public boolean containsNearbyDuplicate(int[] nums, int k) {
-        int length = nums.length;
-        Map<Integer, List<Integer>> map = new HashMap<>();
-        for (int i = 0; i < length; i++) {
-            if (!map.containsKey(nums[i])) {
-                List<Integer> list = new ArrayList<>();
-                list.add(i);
-                map.put(nums[i], list);
-            } else {
-                map.get(nums[i]).add(i);
-            }
-        }
+    // 方法 1
+    // public boolean containsNearbyDuplicate(int[] nums, int k) {
+    //     int length = nums.length;
+    //     Map<Integer, List<Integer>> map = new HashMap<>();
+    //     for (int i = 0; i < length; i++) {
+    //         if (!map.containsKey(nums[i])) {
+    //             List<Integer> list = new ArrayList<>();
+    //             list.add(i);
+    //             map.put(nums[i], list);
+    //         } else {
+    //             map.get(nums[i]).add(i);
+    //         }
+    //     }
 
-        for (int num : map.keySet()) {
-            List<Integer> list = map.get(num);
-            int size = list.size();
-            if (size >= 2) {
-                for (int i = 0; i < size - 1; i++) {
-                    if (list.get(i + 1) - list.get(i) <= k) {
-                        return true;
-                    }
-                }
+    //     for (int num : map.keySet()) {
+    //         List<Integer> list = map.get(num);
+    //         int size = list.size();
+    //         if (size >= 2) {
+    //             for (int i = 0; i < size - 1; i++) {
+    //                 if (list.get(i + 1) - list.get(i) <= k) {
+    //                     return true;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    // 方法 2
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (!set.contains(nums[i])) {
+                set.add(nums[i]);
+            } else {
+                return true;
+            }
+
+            // 若 set 大小超过了 k， 删除散列表中最旧的元素
+            if (set.size() > k) {
+                set.remove(nums[i - k]);
             }
         }
         return false;
@@ -78,7 +99,13 @@ class Solution {
 }
 // @lc code=end
 
-// Accepted
+// 方法 1
 // 23/23 cases passed (17 ms)
 // Your runtime beats 36.55 % of java submissions
 // Your memory usage beats 5.72 % of java submissions (49.3 MB)
+
+// 方法 2
+// Accepted
+// 23/23 cases passed (11 ms)
+// Your runtime beats 73.32 % of java submissions
+// Your memory usage beats 14.29 % of java submissions (43.3 MB)
