@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-24 11:11:14
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-24 11:27:25
+ * @LastEditTime: 2020-04-24 11:35:42
  * @FilePath: /leetcode-zh/easy/219.存在重复元素-ii/Solution.java
  */
 import java.util.ArrayList;
@@ -80,19 +80,32 @@ class Solution {
     // }
 
     // 方法 2
-    public boolean containsNearbyDuplicate(int[] nums, int k) {
-        Set<Integer> set = new HashSet<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (!set.contains(nums[i])) {
-                set.add(nums[i]);
-            } else {
-                return true;
-            }
+    // public boolean containsNearbyDuplicate(int[] nums, int k) {
+    //     Set<Integer> set = new HashSet<>();
+    //     for (int i = 0; i < nums.length; i++) {
+    //         if (!set.contains(nums[i])) {
+    //             set.add(nums[i]);
+    //         } else {
+    //             return true;
+    //         }
 
-            // 若 set 大小超过了 k， 删除散列表中最旧的元素
-            if (set.size() > k) {
-                set.remove(nums[i - k]);
+    //         // 若 set 大小超过了 k， 删除散列表中最旧的元素
+    //         if (set.size() > k) {
+    //             set.remove(nums[i - k]);
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    // 方法 3
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            Integer j = map.get(nums[i]);
+            if (j != null && i - j <= k) {
+                    return true;
             }
+            map.put(nums[i], i);
         }
         return false;
     }
@@ -109,3 +122,9 @@ class Solution {
 // 23/23 cases passed (11 ms)
 // Your runtime beats 73.32 % of java submissions
 // Your memory usage beats 14.29 % of java submissions (43.3 MB)
+
+// 方法 3
+// Accepted
+// 23/23 cases passed (9 ms)
+// Your runtime beats 94.69 % of java submissions
+// Your memory usage beats 8.57 % of java submissions (44.4 MB)
