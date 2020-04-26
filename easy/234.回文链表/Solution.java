@@ -4,7 +4,7 @@ import java.util.Stack;
  * @Author: aponder
  * @Date: 2020-04-26 12:50:12
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-26 12:59:41
+ * @LastEditTime: 2020-04-26 13:25:56
  * @FilePath: /leetcode-zh/easy/234.回文链表/Solution.java
  */
 /*
@@ -51,6 +51,33 @@ import java.util.Stack;
  */
 class Solution {
     // 方法 1: 时间 O(n)，空间 O(n)
+    // public boolean isPalindrome(ListNode head) {
+    //     if (head == null) return true;
+
+    //     ListNode p1 = head, p2 = head;
+    //     while (p2 != null && p2.next != null) {
+    //         p1 = p1.next;
+    //         p2 = p2.next.next;
+    //     }
+
+    //     Stack<Integer> stack = new Stack<>();
+    //     while (p1 != null) {
+    //         stack.push(p1.val);
+    //         p1 = p1.next;
+    //     }
+
+    //     p1 = head;
+    //     while (!stack.empty()) {
+    //         if (p1.val != stack.pop()) {
+    //             return false;
+    //         }
+    //         p1 = p1.next;
+    //     }
+
+    //     return true;
+    // }
+
+    // 方法 2: 时间 O(n)，空间 O(1)
     public boolean isPalindrome(ListNode head) {
         if (head == null) return true;
 
@@ -60,26 +87,38 @@ class Solution {
             p2 = p2.next.next;
         }
 
-        Stack<Integer> stack = new Stack<>();
-        while (p1 != null) {
-            stack.push(p1.val);
-            p1 = p1.next;
-        }
-
+        p2 = reverseList(p1);
         p1 = head;
-        while (!stack.empty()) {
-            if (p1.val != stack.pop()) {
-                return false;
-            }
+        while (p2 != null) {
+            if (p1.val != p2.val) return false;
             p1 = p1.next;
+            p2 = p2.next;
         }
 
         return true;
-    }   
+    }
+
+    // 206.反转链表
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode temp = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return temp;
+    }
 }
 // @lc code=end
 
+// 方法 1: 时间 O(n)，空间 O(n)
 // Accepted
 // 26/26 cases passed (3 ms)
 // Your runtime beats 40.19 % of java submissions
 // Your memory usage beats 5.41 % of java submissions (43.5 MB)
+
+// 方法 2: 时间 O(n)，空间 O(1)
+// Accepted
+// 26/26 cases passed (2 ms)
+// Your runtime beats 62.56 % of java submissions
+// Your memory usage beats 5.41 % of java submissions (44 MB)
