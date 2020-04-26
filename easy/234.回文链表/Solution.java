@@ -4,7 +4,7 @@ import java.util.Stack;
  * @Author: aponder
  * @Date: 2020-04-26 12:50:12
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-26 13:25:56
+ * @LastEditTime: 2020-04-26 13:30:20
  * @FilePath: /leetcode-zh/easy/234.回文链表/Solution.java
  */
 /*
@@ -81,13 +81,23 @@ class Solution {
     public boolean isPalindrome(ListNode head) {
         if (head == null) return true;
 
+        // 寻找中间节点
         ListNode p1 = head, p2 = head;
         while (p2 != null && p2.next != null) {
             p1 = p1.next;
             p2 = p2.next.next;
         }
 
-        p2 = reverseList(p1);
+        // 反转后半链表
+        p2 = null;
+        while (p1 != null) {
+            ListNode temp = p1.next;
+            p1.next = p2;
+            p2 = p1;
+            p1 = temp;
+        }
+
+        // 前半、后半比较
         p1 = head;
         while (p2 != null) {
             if (p1.val != p2.val) return false;
@@ -117,8 +127,14 @@ class Solution {
 // Your runtime beats 40.19 % of java submissions
 // Your memory usage beats 5.41 % of java submissions (43.5 MB)
 
-// 方法 2: 时间 O(n)，空间 O(1)
+// 方法 2: 时间 O(n)，空间 O(1)，递归反转
 // Accepted
 // 26/26 cases passed (2 ms)
 // Your runtime beats 62.56 % of java submissions
 // Your memory usage beats 5.41 % of java submissions (44 MB)
+
+// 方法 2: 时间 O(n)，空间 O(1)，迭代反转
+// Accepted
+// 26/26 cases passed (1 ms)
+// Your runtime beats 99.81 % of java submissions
+// Your memory usage beats 10.81 % of java submissions (42.4 MB)
