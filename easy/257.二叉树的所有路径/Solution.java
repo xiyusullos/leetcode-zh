@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-28 09:29:57
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-28 09:57:36
+ * @LastEditTime: 2020-04-28 10:19:53
  * @FilePath: /leetcode-zh/easy/257.二叉树的所有路径/Solution.java
  */
 import java.util.ArrayList;
@@ -55,33 +55,65 @@ import java.util.List;
  */
 class Solution {
     List<String> list = new ArrayList<>();
+
+    // 方法 1
+    // public List<String> binaryTreePaths(TreeNode root) {
+    //     if (root == null) return list;
+        
+    //     String s = "" + root.val;
+    //     if (root.left == null && root.right == null) {
+    //         list.add(s);
+    //     } else {
+    //         if (root.left != null) leafPath(root.left, s);
+    //         if (root.right != null) leafPath(root.right, s);
+    //     }
+
+    //     return list;
+    // }
+
+    // void leafPath(TreeNode node, String s) {
+    //     if (node.left == null && node.right == null) {
+    //         list.add(s + "->" + node.val);
+    //     } else {
+    //         s += "->" + node.val;
+    //         if (node.left != null) leafPath(node.left, s);
+    //         if (node.right != null) leafPath(node.right, s);
+    //     }
+    // }
+
+    // 方法 2
     public List<String> binaryTreePaths(TreeNode root) {
         if (root == null) return list;
         
-        String s = "" + root.val;
-        if (root.left == null && root.right == null) {
-            list.add(s);
-        } else {
-            if (root.left != null) leafPath(root.left, s);
-            if (root.right != null) leafPath(root.right, s);
-        }
+        StringBuilder sb = new StringBuilder();
+        leafPath(root, sb);
 
         return list;
     }
 
-    void leafPath(TreeNode node, String s) {
+    void leafPath(TreeNode node, StringBuilder sb) {
         if (node.left == null && node.right == null) {
-            list.add(s + "->" + node.val);
+            sb.append("->" + node.val);
+            sb.delete(0, 2);
+            list.add(sb.toString());
         } else {
-            s += "->" + node.val;
-            if (node.left != null) leafPath(node.left, s);
-            if (node.right != null) leafPath(node.right, s);
+            sb.append("->" + node.val);
+            // System.out.println(sb.toString());
+            if (node.left != null) leafPath(node.left, new StringBuilder(sb.toString()));
+            if (node.right != null) leafPath(node.right, new StringBuilder(sb.toString()));
         }
     }
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 209/209 cases passed (14 ms)
 // Your runtime beats 15.07 % of java submissions
 // Your memory usage beats 7.69 % of java submissions (40.2 MB)
+
+// 方法 2
+// Accepted
+// 209/209 cases passed (8 ms)
+// Your runtime beats 49.82 % of java submissions
+// Your memory usage beats 7.69 % of java submissions (39.8 MB)
