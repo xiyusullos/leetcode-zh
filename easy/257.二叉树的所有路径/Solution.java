@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-28 09:29:57
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-28 10:19:53
+ * @LastEditTime: 2020-04-28 10:24:33
  * @FilePath: /leetcode-zh/easy/257.二叉树的所有路径/Solution.java
  */
 import java.util.ArrayList;
@@ -93,14 +93,14 @@ class Solution {
 
     void leafPath(TreeNode node, StringBuilder sb) {
         if (node.left == null && node.right == null) {
-            sb.append("->" + node.val);
-            sb.delete(0, 2);
+            sb.append(node.val);
+            // sb.delete(0, 2);
             list.add(sb.toString());
         } else {
-            sb.append("->" + node.val);
+            sb.append("" + node.val + "->");
             // System.out.println(sb.toString());
-            if (node.left != null) leafPath(node.left, new StringBuilder(sb.toString()));
-            if (node.right != null) leafPath(node.right, new StringBuilder(sb.toString()));
+            if (node.left != null) leafPath(node.left, new StringBuilder(sb));
+            if (node.right != null) leafPath(node.right, new StringBuilder(sb));
         }
     }
 }
