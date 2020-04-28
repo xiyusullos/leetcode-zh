@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-28 09:06:35
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-28 09:17:08
+ * @LastEditTime: 2020-04-28 09:26:08
  * @FilePath: /leetcode-zh/easy/242.有效的字母异位词/Solution.java
  */
 import java.util.HashMap;
@@ -46,24 +46,43 @@ import java.util.Map;
 
 // @lc code=start
 class Solution {
-    public boolean isAnagram(String s, String t) {
-        int lengthS = s.length();
-        int lengthT = t.length();
-        if (lengthS != lengthT) return false;
+    // 方法 1
+    // public boolean isAnagram(String s, String t) {
+    //     int lengthS = s.length();
+    //     int lengthT = t.length();
+    //     if (lengthS != lengthT) return false;
 
-        Map<Character, Integer> map = new HashMap<>(lengthS);
-        for (int i = 0; i < lengthS; i++) {
-            char c = s.charAt(i);
-            Integer value = map.get(c);
-            if (value == null) map.put(c, 1);
-            else map.put(c, value + 1);
+    //     Map<Character, Integer> map = new HashMap<>(lengthS);
+    //     for (int i = 0; i < lengthS; i++) {
+    //         char c = s.charAt(i);
+    //         Integer value = map.get(c);
+    //         if (value == null) map.put(c, 1);
+    //         else map.put(c, value + 1);
+    //     }
+
+    //     for (int i = 0; i < lengthT; i++) {
+    //         char c = t.charAt(i);
+    //         Integer value = map.get(c);
+    //         if (value == null || value == 0) return false;
+    //         map.put(c, value - 1);
+    //     }
+
+    //     return true;
+    // }
+
+    // 方法 2
+    public boolean isAnagram(String s, String t) {
+        int ls = s.length(), lt = t.length();
+        if (ls != lt) return false;
+        
+        // 26 个英文字母
+        int[] counter = new int[26];
+        for (int i = 0; i < ls; i++) {
+            counter[s.charAt(i) - 'a']++;
         }
 
-        for (int i = 0; i < lengthT; i++) {
-            char c = t.charAt(i);
-            Integer value = map.get(c);
-            if (value == null || value == 0) return false;
-            map.put(c, value - 1);
+        for (int i = 0; i < lt; i++) {
+            if (counter[t.charAt(i) - 'a']-- == 0) return false;
         }
 
         return true;
@@ -71,7 +90,14 @@ class Solution {
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
-// 34/34 cases passed (18 ms)
-// Your runtime beats 20.1 % of java submissions
-// Your memory usage beats 5.66 % of java submissions (41.3 MB)
+// 34/34 cases passed (15 ms)
+// Your runtime beats 22.62 % of java submissions
+// Your memory usage beats 5.66 % of java submissions (40.8 MB)
+
+// 方法 2
+// Accepted
+// 34/34 cases passed (3 ms)
+// Your runtime beats 91.09 % of java submissions
+// Your memory usage beats 5.66 % of java submissions (40.1 MB)
