@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-29 12:29:51
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-29 12:36:20
+ * @LastEditTime: 2020-04-29 12:37:05
  * @FilePath: /leetcode-zh/easy/258.各位相加/Solution.java
  */
 /*
@@ -37,16 +37,29 @@
 // @lc code=start
 class Solution {
     // 方法 1: 递归
+    // public int addDigits(int num) {
+    //     if (num < 10) {
+    //         return num;
+    //     }
+    //     int n = 0;
+    //     while (num > 0) {
+    //         n += num % 10;
+    //         num /= 10;
+    //     }
+    //     return addDigits(n);
+    // }
+
+    // 方法 2: 循环（迭代）
     public int addDigits(int num) {
-        if (num < 10) {
-            return num;
+        while (num > 9) {
+            int n = 0;
+            while (num > 0) {
+                n += num % 10;
+                num /= 10;
+            }
+            num = n;
         }
-        int n = 0;
-        while (num > 0) {
-            n += num % 10;
-            num /= 10;
-        }
-        return addDigits(n);
+        return num;
     }
 }
 // @lc code=end
@@ -56,3 +69,9 @@ class Solution {
 // 1101/1101 cases passed (1 ms)
 // Your runtime beats 100 % of java submissions
 // Your memory usage beats 8 % of java submissions (36.9 MB)
+
+// 方法 2: 循环（迭代）
+// Accepted
+// 1101/1101 cases passed (1 ms)
+// Your runtime beats 100 % of java submissions
+// Your memory usage beats 8 % of java submissions (37.1 MB)
