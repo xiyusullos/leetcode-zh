@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-30 10:25:54
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-30 10:33:05
+ * @LastEditTime: 2020-04-30 10:39:12
  * @FilePath: /leetcode-zh/easy/268.缺失数字/Solution.java
  */
 /*
@@ -41,18 +41,36 @@
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public int missingNumber(int[] nums) {
+    //     int n = nums.length;
+    //     int sum = (0 + n) * (n + 1) / 2;
+    //     for (int i = 0; i < n; i++) {
+    //         sum -= nums[i];
+    //     }
+    //     return sum;
+    // }
+
+    // 方法 2
     public int missingNumber(int[] nums) {
         int n = nums.length;
-        int sum = (0 + n) * (n + 1) / 2;
+        int missing = n;
         for (int i = 0; i < n; i++) {
-            sum -= nums[i];
+            missing ^= i ^ nums[i];
         }
-        return sum;
+        return missing;
     }
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 122/122 cases passed (0 ms)
 // Your runtime beats 100 % of java submissions
 // Your memory usage beats 6.67 % of java submissions (40.2 MB)
+
+// 方法 2
+// Accepted
+// 122/122 cases passed (0 ms)
+// Your runtime beats 100 % of java submissions
+// Your memory usage beats 33.33 % of java submissions (39.6 MB)
