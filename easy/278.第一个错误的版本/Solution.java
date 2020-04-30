@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-04-30 10:40:16
  * @LastEditors: aponder
- * @LastEditTime: 2020-04-30 11:05:12
+ * @LastEditTime: 2020-04-30 11:12:30
  * @FilePath: /leetcode-zh/easy/278.第一个错误的版本/Solution.java
  */
 /*
@@ -46,27 +46,21 @@
 
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
-        if (isBadVersion(1))
-            return 1;
+        // if (isBadVersion(1))
+        //     return 1;
 
-        int l = 2, h = n;
+        int l = 1, h = n;
         int m = l + (h - l) / 2;
 
-        while (l <= h) {
+        while (l < h) {
             m = l + (h - l) / 2;
-            boolean current = isBadVersion(m);
+            // 在前面
+            if (isBadVersion(m)) h = m;
             // 在后面
-            if (current == false) {
-                l = m + 1;
-                continue;
-            }
-            
-            boolean previous = isBadVersion(m - 1);
-            if (previous == false && current == true) return m;
-            else h = m - 1;  // 在前面
+            else l = m + 1;
         }
 
-        return m;
+        return l;
     }
 }
 // @lc code=end
@@ -80,3 +74,8 @@ public class Solution extends VersionControl {
 // 22/22 cases passed (21 ms)
 // Your runtime beats 30.24 % of java submissions
 // Your memory usage beats 8.33 % of java submissions (36.3 MB)
+
+// Accepted
+// 22/22 cases passed (16 ms)
+// Your runtime beats 81.27 % of java submissions
+// Your memory usage beats 8.33 % of java submissions (36.2 MB)
