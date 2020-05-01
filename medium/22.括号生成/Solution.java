@@ -3,7 +3,7 @@
  * @Author: aponder
  * @Date: 2020-05-01 12:34:30
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-01 13:30:24
+ * @LastEditTime: 2020-05-01 13:38:53
  * @FilePath: /leetcode-zh/medium/22.括号生成/Solution.java
  */
 import java.util.ArrayList;
@@ -61,10 +61,14 @@ class Solution {
                 sb.append(')');
             }
             list.add(sb.toString());
+            sb.delete(sb.length() - 1 - remainOut, sb.length() - 1);
         } else {
-            nextParenthesis(new StringBuilder(sb).append('('), remainIn - 1, remainOut);
-            if (remainOut > remainIn)
-                nextParenthesis(new StringBuilder(sb).append(')'), remainIn, remainOut - 1);
+            nextParenthesis(sb.append('('), remainIn - 1, remainOut);
+            sb.deleteCharAt(sb.length() - 1);
+            if (remainOut > remainIn) {
+                nextParenthesis(sb.append(')'), remainIn, remainOut - 1);
+                sb.deleteCharAt(sb.length() - 1);
+            }
         }
     }
 
