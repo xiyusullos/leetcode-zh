@@ -7,7 +7,7 @@ import java.util.Set;
  * @Author: aponder
  * @Date: 2020-05-02 10:05:53
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-02 10:32:19
+ * @LastEditTime: 2020-05-02 10:43:04
  * @FilePath: /leetcode-zh/easy/299.猜数字游戏/Solution.java
  */
 /*
@@ -116,7 +116,11 @@ class Solution {
             b += Math.min(map1[i], map2[i]);
         }
 
-        return "" + a + "A" + b + "B";
+        // return "" + a + "A" + b + "B";
+
+        // 方法 3
+        StringBuilder sb = new StringBuilder();
+        return sb.append(a).append('A').append(b).append('B').toString();
     }
 }
 // @lc code=end
@@ -132,3 +136,9 @@ class Solution {
 // 152/152 cases passed (6 ms)
 // Your runtime beats 79.22 % of java submissions
 // Your memory usage beats 5.55 % of java submissions (40.2 MB)
+
+// 方法 3
+// Accepted
+// 152/152 cases passed (1 ms)
+// Your runtime beats 100 % of java submissions
+// Your memory usage beats 5.55 % of java submissions (38.6 MB)
