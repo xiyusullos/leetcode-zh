@@ -7,7 +7,7 @@ import java.util.Set;
  * @Author: aponder
  * @Date: 2020-05-02 10:05:53
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-02 10:25:24
+ * @LastEditTime: 2020-05-02 10:32:19
  * @FilePath: /leetcode-zh/easy/299.猜数字游戏/Solution.java
  */
 /*
@@ -55,13 +55,50 @@ import java.util.Set;
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public String getHint(String secret, String guess) {
+    //     int l1 = secret.length();
+    //     int l2 = guess.length();
+    //     if (l1 != l2) return "";
+
+    //     Map<Character, Integer> map1 = new HashMap();
+    //     Map<Character, Integer> map2 = new HashMap();
+        
+    //     int a = 0, b = 0;
+    //     char c1, c2;
+    //     for (int i = 0; i < l1; i++) {
+    //         c1 = secret.charAt(i);
+    //         c2 = guess.charAt(i);
+    //         if (c1 == c2) a++;
+    //         else {
+    //             Integer t1 = map1.get(c1);
+    //             if (t1 == null) map1.put(c1, 1);
+    //             else map1.put(c1, 1 + t1);
+                
+    //             Integer t2 = map2.get(c2);
+    //             if (t2 == null) map2.put(c2, 1);
+    //             else map2.put(c2, 1 + t2);
+    //         }
+    //     }
+
+    //     Set<Character> set1 = map1.keySet();
+    //     Set<Character> set2 = map2.keySet();
+    //     set1.retainAll(set2);
+    //     for (Character c : set1) {
+    //         // System.out.println(c + ":" + map1.get(c) + "," + map2.get(c));
+    //         b += Math.min(map1.get(c), map2.get(c));
+    //     }
+
+    //     return "" + a + "A" + b + "B";
+    // }
+
     public String getHint(String secret, String guess) {
         int l1 = secret.length();
         int l2 = guess.length();
         if (l1 != l2) return "";
 
-        Map<Character, Integer> map1 = new HashMap();
-        Map<Character, Integer> map2 = new HashMap();
+        int[] map1 = new int[10];
+        int[] map2 = new int[10];
         
         int a = 0, b = 0;
         char c1, c2;
@@ -70,22 +107,13 @@ class Solution {
             c2 = guess.charAt(i);
             if (c1 == c2) a++;
             else {
-                Integer t1 = map1.get(c1);
-                if (t1 == null) map1.put(c1, 1);
-                else map1.put(c1, 1 + t1);
-                
-                Integer t2 = map2.get(c2);
-                if (t2 == null) map2.put(c2, 1);
-                else map2.put(c2, 1 + t2);
+                map1[c1 - '0'] += 1;
+                map2[c2 - '0'] += 1;
             }
         }
 
-        Set<Character> set1 = map1.keySet();
-        Set<Character> set2 = map2.keySet();
-        set1.retainAll(set2);
-        for (Character c : set1) {
-            // System.out.println(c + ":" + map1.get(c) + "," + map2.get(c));
-            b += Math.min(map1.get(c), map2.get(c));
+        for (int i = 0; i < 10; i++) {
+            b += Math.min(map1[i], map2[i]);
         }
 
         return "" + a + "A" + b + "B";
@@ -93,7 +121,14 @@ class Solution {
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 152/152 cases passed (11 ms)
 // Your runtime beats 25.97 % of java submissions
 // Your memory usage beats 5.55 % of java submissions (40 MB)
+
+// 方法 2
+// Accepted
+// 152/152 cases passed (6 ms)
+// Your runtime beats 79.22 % of java submissions
+// Your memory usage beats 5.55 % of java submissions (40.2 MB)
