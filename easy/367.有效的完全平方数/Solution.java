@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-05 13:45:07
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-05 13:54:38
+ * @LastEditTime: 2020-05-05 14:16:54
  * @FilePath: /leetcode-zh/easy/367.有效的完全平方数/Solution.java
  */
 /*
@@ -39,27 +39,49 @@
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public boolean isPerfectSquare(int num) {
+    //     // x^2-2x+1 < x^2 < x^2+2x+1
+    //     // -2x+1 < 0 < 2X+1
+    //     if (num < 0) {
+    //         return false;
+    //     }
+
+    //     if (num <= 1) {
+    //         return true;
+    //     }
+
+    //     int n;
+    //     for (int i = 2; i < num; i++) {
+    //         n = i * i;
+    //         if (n == num) return true;
+    //         else if (n < num) continue;
+    //         else return false;
+    //     }
+
+    //     return false;
+    // }
+
+    // 方法 2
     public boolean isPerfectSquare(int num) {
-        // x^2-2x+1 < x^2 < x^2+2x+1
-        // -2x+1 < 0 < 2X+1
-        if (num < 0) {
-            return false;
-        }
-
-        if (num <= 1) {
-            return true;
-        }
-
-        int n;
-        for (int i = 2; i < num; i++) {
-            n = i * i;
+        if (num < 0) return false;
+        if (num < 2 || num == 4 || num == 9) return true;
+        int l = 4, r = num / 4;
+        int m;
+        long n;
+        while (l <= r) {
+            m = l + (r - l) / 2;
+            n = (long) m * m;
             if (n == num) return true;
-            else if (n < num) continue;
-            else return false;
+            else if (n < num) l = m + 1;
+            else r = m -1;
         }
-
         return false;
     }
 }
 // @lc code=end
 
+// Accepted
+// 68/68 cases passed (1592 ms)
+// Your runtime beats 5.04 % of java submissions
+// Your memory usage beats 9.52 % of java submissions (35.5 MB)
