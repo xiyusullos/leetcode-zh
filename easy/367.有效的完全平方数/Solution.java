@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-05 13:45:07
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-05 14:16:54
+ * @LastEditTime: 2020-05-05 14:17:45
  * @FilePath: /leetcode-zh/easy/367.有效的完全平方数/Solution.java
  */
 /*
@@ -81,7 +81,14 @@ class Solution {
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 68/68 cases passed (1592 ms)
 // Your runtime beats 5.04 % of java submissions
 // Your memory usage beats 9.52 % of java submissions (35.5 MB)
+
+// 方法 2
+// Accepted
+// 68/68 cases passed (0 ms)
+// Your runtime beats 100 % of java submissions
+// Your memory usage beats 9.52 % of java submissions (36 MB)
