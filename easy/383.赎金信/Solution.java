@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-06 20:54:57
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-06 21:01:28
+ * @LastEditTime: 2020-05-06 21:10:11
  * @FilePath: /leetcode-zh/easy/383.赎金信/Solution.java
  */
 import java.util.HashMap;
@@ -43,27 +43,51 @@ import java.util.Map;
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public boolean canConstruct(String ransomNote, String magazine) {
+    //     Map<Character, Integer> map = new HashMap<>();
+    //     for (char c : magazine.toCharArray()) {
+    //         map.put(c, 1 + map.getOrDefault(c, 0));
+    //     }
+        
+    //     Integer count = null;
+    //     for (char c : ransomNote.toCharArray()) {
+    //         count = map.get(c);
+    //         if (count == null || count == 0) return false;
+    //         else {
+    //             map.put(c, count - 1);
+    //         }
+    //     }
+
+    //     return true;
+    // }
+
+    // 方法 2
     public boolean canConstruct(String ransomNote, String magazine) {
-        Map<Character, Integer> map = new HashMap<>();
+        // if (ransomNote.length() == 0) return true;
+        if (ransomNote.length() > magazine.length()) return false;
+
+        int[] map = new int[26];
         for (char c : magazine.toCharArray()) {
-            map.put(c, 1 + map.getOrDefault(c, 0));
+            map[c - 'a']++; 
         }
         
-        Integer count = null;
         for (char c : ransomNote.toCharArray()) {
-            count = map.get(c);
-            if (count == null || count == 0) return false;
-            else {
-                map.put(c, count - 1);
-            }
+            if (map[c - 'a'] == 0) return false;
+            else map[c - 'a']--;
         }
-
         return true;
     }
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 126/126 cases passed (19 ms)
 // Your runtime beats 27.71 % of java submissions
 // Your memory usage beats 8.33 % of java submissions (40.4 MB)
+
+// Accepted
+// 126/126 cases passed (3 ms)
+// Your runtime beats 80.36 % of java submissions
+// Your memory usage beats 8.33 % of java submissions (40.3 MB)
