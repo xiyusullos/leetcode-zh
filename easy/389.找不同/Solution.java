@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-07 09:26:26
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-07 09:33:16
+ * @LastEditTime: 2020-05-07 09:40:38
  * @FilePath: /leetcode-zh/easy/389.找不同/Solution.java
  */
 /*
@@ -45,22 +45,38 @@
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public char findTheDifference(String s, String t) {
+    //     int result = 0;
+    //     int ls = s.length(), lt = t.length();
+    //     for (int i = 0; i < ls; i++) {
+    //         result ^= s.charAt(i) - 'a';
+    //     }
+
+    //     return (char) ('a' + result);
+    // }
+
+    // 方法 2
     public char findTheDifference(String s, String t) {
-        int result = 0;
-        int ls = s.length(), lt = t.length();
+        int ls = s.length();
+        char result = t.charAt(ls);
         for (int i = 0; i < ls; i++) {
-            result ^= s.charAt(i) - 'a';
-        }
-        for (int i = 0; i < lt; i++) {
-            result ^= t.charAt(i) - 'a';
+            result ^= s.charAt(i) ^ t.charAt(i);
         }
 
-        return (char) ('a' + result);
+        return result;
     }
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 54/54 cases passed (2 ms)
 // Your runtime beats 78.57 % of java submissions
+// Your memory usage beats 25 % of java submissions (37.6 MB)
+
+// 方法 2
+// Accepted
+// 54/54 cases passed (1 ms)
+// Your runtime beats 100 % of java submissions
 // Your memory usage beats 25 % of java submissions (37.6 MB)
