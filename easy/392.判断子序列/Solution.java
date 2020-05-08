@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-08 10:52:45
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-08 10:56:37
+ * @LastEditTime: 2020-05-08 11:03:58
  * @FilePath: /leetcode-zh/easy/392.判断子序列/Solution.java
  */
 /*
@@ -50,23 +50,42 @@
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public boolean isSubsequence(String s, String t) {
+    //     int ls = s.length(), lt = t.length();
+    //     if (ls == 0) return true;
+    //     if (ls > lt) return false;
+
+    //     int j = 0;
+    //     for (int i = 0; i < lt; i++) {
+    //         if (s.charAt(j) == t.charAt(i)) j++;
+    //         if (j == ls) return true;
+    //     }
+
+    //     return false;
+    // }
+
     public boolean isSubsequence(String s, String t) {
-        int ls = s.length(), lt = t.length();
-        if (ls == 0) return true;
-        if (ls > lt) return false;
-
-        int j = 0;
-        for (int i = 0; i < lt; i++) {
-            if (s.charAt(j) == t.charAt(i)) j++;
-            if (j == ls) return true;
+        int index = -1;
+        for (char c : s.toCharArray()) {
+            index = t.indexOf(c, index + 1);
+            if (index == -1) {
+                return false;
+            }
         }
-
-        return false;
+        return true;
     }
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 14/14 cases passed (9 ms)
 // Your runtime beats 55.38 % of java submissions
 // Your memory usage beats 100 % of java submissions (43.1 MB)
+
+// 方法 2
+// Accepted
+// 14/14 cases passed (1 ms)
+// Your runtime beats 96.31 % of java submissions
+// Your memory usage beats 100 % of java submissions (43 MB)
