@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-09 11:06:07
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-09 11:28:58
+ * @LastEditTime: 2020-05-09 11:31:44
  * @FilePath: /leetcode-zh/easy/409.最长回文串/Solution.java
  */
 /*
@@ -46,11 +46,12 @@
 class Solution {
     public int longestPalindrome(String s) {
         // 大写字母和小写字母
-        int[] counter = new int[52];
+        int[] counter = new int[128];
         int odd = 0, even = 0;
         int i;
         for (char c : s.toCharArray()) {
-            i = toIndex(c);
+            // i = toIndex(c);
+            i = (int) c;
             if (counter[i] % 2 == 0) {
                 // 原来是偶数个，现在是奇数个
                 odd++;
@@ -77,3 +78,8 @@ class Solution {
 // 95/95 cases passed (3 ms)
 // Your runtime beats 52.05 % of java submissions
 // Your memory usage beats 5 % of java submissions (37.1 MB)
+
+// Accepted
+// 95/95 cases passed (2 ms)
+// Your runtime beats 75 % of java submissions
+// Your memory usage beats 5 % of java submissions (38.1 MB)
