@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-09 11:06:07
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-09 11:31:44
+ * @LastEditTime: 2020-05-09 11:34:01
  * @FilePath: /leetcode-zh/easy/409.最长回文串/Solution.java
  */
 /*
@@ -48,10 +48,8 @@ class Solution {
         // 大写字母和小写字母
         int[] counter = new int[128];
         int odd = 0, even = 0;
-        int i;
-        for (char c : s.toCharArray()) {
+        for (char i : s.toCharArray()) {
             // i = toIndex(c);
-            i = (int) c;
             if (counter[i] % 2 == 0) {
                 // 原来是偶数个，现在是奇数个
                 odd++;
