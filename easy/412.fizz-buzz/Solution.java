@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-10 10:46:09
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-10 10:51:38
+ * @LastEditTime: 2020-05-10 11:31:59
  * @FilePath: /leetcode-zh/easy/412.fizz-buzz/Solution.java
  */
 import java.util.ArrayList;
@@ -62,10 +62,13 @@ class Solution {
     public List<String> fizzBuzz(int n) {
         List<String> list = new ArrayList<>(n);
         for (int i = 1; i <= n; i++) {
-            if (i % 3 == 0 && i % 5 != 0) list.add("Fizz");
-            else if (i % 5 == 0 && i % 3 != 0) list.add("Buzz");
-            else if (i % 3 == 0 && i % 5 == 0) list.add("FizzBuzz");
-            else list.add(new StringBuilder().append(i).toString());
+            if (i % 3 == 0) {
+                if (i % 5 == 0) list.add("FizzBuzz");
+                else list.add("Fizz");
+            } else {
+                if (i % 5 == 0) list.add("Buzz");
+                else list.add(new StringBuilder().append(i).toString());
+            }
         }
         return list;
     }
@@ -76,3 +79,8 @@ class Solution {
 // 8/8 cases passed (2 ms)
 // Your runtime beats 73.03 % of java submissions
 // Your memory usage beats 8.7 % of java submissions (40.7 MB)
+
+// Accepted
+// 8/8 cases passed (1 ms)
+// Your runtime beats 100 % of java submissions
+// Your memory usage beats 8.7 % of java submissions (41 MB)
