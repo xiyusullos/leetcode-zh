@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-10 10:59:47
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-10 11:28:24
+ * @LastEditTime: 2020-05-10 11:38:45
  * @FilePath: /leetcode-zh/easy/414.第三大的数/Solution.java
  */
 import java.util.Stack;
@@ -60,27 +60,20 @@ import java.util.Stack;
 // @lc code=start
 class Solution {
     public int thirdMax(int[] nums) {
-        Integer m1, m2, m3;
-        m1 = m2 = m3 = Integer.MIN_VALUE;
-        int count = 1;
+        long m1, m2, m3;
+        m1 = m2 = m3 = Long.MIN_VALUE;
         for (int num : nums) {
-            if (num > m1) m1 = num;
-        }
-        for (int num : nums) {
-            if (num > m2 && num < m1) {
+            if (num > m1) {
+                m3 = m2;
+                m2 = m1;
+                m1 = num;
+            } else if (num > m2 && num < m1) {
+                m3 = m2;
                 m2 = num;
-            }
-        }
-        if (m2 == Integer.MIN_VALUE) return m1;
-
-        for (int num : nums) {
-            if (num >= m3 && num < m2) {
-                m3 = num;
-                count = 3;
-            }
+            } else if (num > m3 && num < m2) m3 = num;
         }
         // System.out.println("" + m1 + ", " + m2 + ", " + m3);
-        return count == 3 ? m3 : m1;
+        return m3 != Long.MIN_VALUE ? (int) m3 : (int) m1;
     }
 }
 // @lc code=end
@@ -89,3 +82,8 @@ class Solution {
 // 26/26 cases passed (3 ms)
 // Your runtime beats 54.1 % of java submissions
 // Your memory usage beats 11.11 % of java submissions (39.7 MB)
+
+// Accepted
+// 26/26 cases passed (0 ms)
+// Your runtime beats 100 % of java submissions
+// Your memory usage beats 11.11 % of java submissions (39.9 MB)
