@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-11 10:48:27
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-11 11:14:52
+ * @LastEditTime: 2020-05-11 11:17:46
  * @FilePath: /leetcode-zh/easy/415.字符串相加/Solution.java
  */
 /*
@@ -54,12 +54,15 @@ class Solution {
         int carry = 0;
         int t;
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < l1; i++) {
-            if (i < l2) {
-                t = (num1.charAt(l1 - 1 - i) - '0') + (num2.charAt(l2 - 1 - i) - '0') + carry;
-            } else {
-                t = (num1.charAt(l1 - 1 - i) - '0') + carry;
-            }
+        int i = 0;
+        for (; i < l2; i++) {
+            t = (num1.charAt(l1 - 1 - i) - '0') + (num2.charAt(l2 - 1 - i) - '0') + carry;
+            carry = t / 10;
+            result.append(t % 10);
+        }
+
+        for (; i < l1; i++) {
+            t = (num1.charAt(l1 - 1 - i) - '0') + carry;
             carry = t / 10;
             result.append(t % 10);
         }
@@ -82,3 +85,8 @@ class Solution {
 // 315/315 cases passed (3 ms)
 // Your runtime beats 81.97 % of java submissions
 // Your memory usage beats 8.33 % of java submissions (39.7 MB)
+
+// Accepted
+// 315/315 cases passed (2 ms)
+// Your runtime beats 99.6 % of java submissions
+// Your memory usage beats 8.33 % of java submissions (39.5 MB)
