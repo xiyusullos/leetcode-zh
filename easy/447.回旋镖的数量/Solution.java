@@ -1,8 +1,12 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /*
  * @Author: aponder
  * @Date: 2020-05-13 13:12:10
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-13 13:20:59
+ * @LastEditTime: 2020-05-13 13:38:00
  * @FilePath: /leetcode-zh/easy/447.回旋镖的数量/Solution.java
  */
 /*
@@ -42,25 +46,50 @@
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public int numberOfBoomerangs(int[][] points) {
+    //     int count = 0;
+    //     int length = points.length;
+    //     int d1, d2; // 点之间的距离
+    //     int t1, t2; // 临时变量
+    //     for (int i = 0; i < length; i++) {
+    //         for (int j = 0; j < length; j++) {
+    //             if (j == i) continue;
+    //             t1 = points[i][0] - points[j][0];
+    //             t2 = points[i][1] - points[j][1];
+    //             d1 = t1 * t1 + t2 * t2;
+    //             for (int k = 0; k < length; k++) {
+    //                 if (k == i || k == j) continue;
+    //                 t1 = points[i][0] - points[k][0];
+    //                 t2 = points[i][1] - points[k][1];
+    //                 d2 = t1 * t1 + t2 * t2;
+    //                 if (d1 == d2) count++;
+    //             }
+    //         }
+    //     }
+
+    //     return count;
+    // }
+
+    // 方法 2
     public int numberOfBoomerangs(int[][] points) {
+        // points 不重复
+        Map<Integer, Integer> map = new HashMap<>();
+        int t1, t2;
+        int d1, d2;
         int count = 0;
-        int length = points.length;
-        int d1, d2; // 点之间的距离
-        int t1, t2; // 临时变量
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
-                if (j == i) continue;
-                t1 = points[i][0] - points[j][0];
-                t2 = points[i][1] - points[j][1];
+        for (int[] p1 : points) {
+            for (int[] p2 : points) {   
+                t1 = p1[0] - p2[0];
+                t2 = p1[1] - p2[1];
                 d1 = t1 * t1 + t2 * t2;
-                for (int k = 0; k < length; k++) {
-                    if (k == i || k == j) continue;
-                    t1 = points[i][0] - points[k][0];
-                    t2 = points[i][1] - points[k][1];
-                    d2 = t1 * t1 + t2 * t2;
-                    if (d1 == d2) count++;
-                }
+                map.put(d1, 1 + map.getOrDefault(d1, 0));
             }
+
+            for (int val : map.values()) {
+                count += val * (val - 1);
+            }
+            map.clear();
         }
 
         return count;
@@ -68,3 +97,14 @@ class Solution {
 }
 // @lc code=end
 
+// 方法 1
+// Accepted
+// 31/31 cases passed (2504 ms)
+// Your runtime beats 5.01 % of java submissions
+// Your memory usage beats 75 % of java submissions (39.4 MB)
+
+// 方法 2
+// Accepted
+// 31/31 cases passed (122 ms)
+// Your runtime beats 64.68 % of java submissions
+// Your memory usage beats 75 % of java submissions (39.6 MB)
