@@ -2,7 +2,7 @@
  * @Author: aponder
  * @Date: 2020-05-14 12:27:32
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-14 12:48:33
+ * @LastEditTime: 2020-05-14 13:02:21
  * @FilePath: /leetcode-zh/easy/453.最小移动次数使数组元素相等/Solution.java
  */
 import java.util.Arrays;
@@ -45,22 +45,45 @@ import java.util.Collections;
 
 // @lc code=start
 class Solution {
-    public int minMoves(int[] nums) {
-        Arrays.sort(nums);
+    // 方法 1
+    // public int minMoves(int[] nums) {
+    //     Arrays.sort(nums);
 
+    //     int length = nums.length;
+    //     int count = 0;
+    //     int minI = 0, maxI = length - 1;
+    //     for (int i = length - 1; i >= 1; i--) {
+    //         count += nums[i] - nums[minI];
+    //     }
+
+    //     return count;
+    // }
+
+    public int minMoves(int[] nums) {
         int length = nums.length;
         int count = 0;
-        int minI = 0, maxI = length - 1;
-        for (int i = length - 1; i >= 1; i--) {
-            count += nums[i] - nums[minI];
+        int possibleMinI = 0;
+        int trueMinI = possibleMinI;
+        for (int i = 0; i < length; i++) {
+            count += nums[i] - nums[possibleMinI];
+            if (nums[i] < nums[trueMinI]) trueMinI = i;
         }
-
+        // System.out.println(count);
+        count += length * (nums[possibleMinI] - nums[trueMinI]);
         return count;
     }
+
 }
 // @lc code=end
 
+// 方法 1
 // Accepted
 // 84/84 cases passed (14 ms)
 // Your runtime beats 29.5 % of java submissions
 // Your memory usage beats 66.67 % of java submissions (40.3 MB)
+
+// 方法 2
+// Accepted
+// 84/84 cases passed (2 ms)
+// Your runtime beats 86.65 % of java submissions
+// Your memory usage beats 100 % of java submissions (39.8 MB)
