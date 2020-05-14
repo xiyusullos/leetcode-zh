@@ -2,9 +2,10 @@
  * @Author: aponder
  * @Date: 2020-05-14 12:27:32
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-14 12:36:21
+ * @LastEditTime: 2020-05-14 12:48:33
  * @FilePath: /leetcode-zh/easy/453.最小移动次数使数组元素相等/Solution.java
  */
+import java.util.Arrays;
 import java.util.Collections;
 
 /*
@@ -45,24 +46,21 @@ import java.util.Collections;
 // @lc code=start
 class Solution {
     public int minMoves(int[] nums) {
+        Arrays.sort(nums);
+
         int length = nums.length;
         int count = 0;
-        int maxI = 0, minI = 0;
-        int delta = 0;
-        do {
-            for (int i = 0; i < length; i++) {
-                if (nums[i] > nums[maxI]) maxI = i;
-                if (nums[i] < nums[minI]) minI = i;
-            }
-            delta = nums[maxI] - nums[minI];
-            count += delta;
-            for (int i = 0; i < length; i++) {
-                if (i != maxI) nums[i] += delta;
-            }
-        } while (delta != 0);
+        int minI = 0, maxI = length - 1;
+        for (int i = length - 1; i >= 1; i--) {
+            count += nums[i] - nums[minI];
+        }
 
         return count;
     }
 }
 // @lc code=end
 
+// Accepted
+// 84/84 cases passed (14 ms)
+// Your runtime beats 29.5 % of java submissions
+// Your memory usage beats 66.67 % of java submissions (40.3 MB)
