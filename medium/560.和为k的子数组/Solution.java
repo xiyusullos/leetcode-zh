@@ -1,8 +1,11 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * @Author: aponder
  * @Date: 2020-05-15 11:08:27
  * @LastEditors: aponder
- * @LastEditTime: 2020-05-15 11:15:37
+ * @LastEditTime: 2020-05-15 11:44:17
  * @FilePath: /leetcode-zh/medium/560.和为k的子数组/Solution.java
  */
 /*
@@ -41,20 +44,36 @@
 // @lc code=start
 class Solution {
     // 方法 1
+    // public int subarraySum(int[] nums, int k) {
+    //     // 2147483647
+    //     // 20000000
+    //     int length = nums.length;
+    //     int sum = 0;
+    //     int count = 0;
+    //     for (int i = 0; i < length; i++) {
+    //         sum = 0;
+    //         for (int j = i; j < length; j++) {
+    //             sum += nums[j];
+    //             if (sum == k)
+    //                 count++;
+    //         }
+    //     }
+    //     return count;
+    // }
+
+    // 方法 2
     public int subarraySum(int[] nums, int k) {
-        // 2147483647
-        // 20000000
         int length = nums.length;
-        int sum = 0;
+        int pre = 0;
         int count = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1); // pre == k 时，加 1
         for (int i = 0; i < length; i++) {
-            sum = 0;
-            for (int j = i; j < length; j++) {
-                sum += nums[j];
-                if (sum == k)
-                    count++;
-            }
+            pre += nums[i];
+            count += map.getOrDefault(pre - k, 0);
+            map.put(pre, 1 + map.getOrDefault(pre, 0));
         }
+
         return count;
     }
 }
@@ -65,3 +84,9 @@ class Solution {
 // 81/81 cases passed (402 ms)
 // Your runtime beats 7.86 % of java submissions
 // Your memory usage beats 7.69 % of java submissions (40.9 MB)
+
+// 方法 2
+// Accepted
+// 81/81 cases passed (24 ms)
+// Your runtime beats 60.71 % of java submissions
+// Your memory usage beats 11.54 % of java submissions (40.2 MB)
