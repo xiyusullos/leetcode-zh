@@ -71,3 +71,7 @@ class Solution {
 }
 // @lc code=end
 
+// Accepted
+// 149/149 cases passed (1 ms)
+// Your runtime beats 36.39 % of java submissions
+// Your memory usage beats 7.69 % of java submissions (36.4 MB)
