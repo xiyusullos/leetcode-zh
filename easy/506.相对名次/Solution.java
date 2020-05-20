@@ -1,3 +1,11 @@
+/*
+ * @Author: aponder
+ * @Date: 2020-05-20 08:49:41
+ * @LastEditTime: 2020-05-20 10:15:46
+ * @LastEditors: aponder
+ * @Description: 
+ * @FilePath: /leetcode-zh/easy/506.相对名次/Solution.java
+ */ 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
