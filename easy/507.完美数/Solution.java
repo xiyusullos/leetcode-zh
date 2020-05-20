@@ -1,7 +1,7 @@
 /*
  * @Author: aponder
  * @Date: 2020-05-20 10:08:46
- * @LastEditTime: 2020-05-20 10:15:34
+ * @LastEditTime: 2020-05-20 10:22:30
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/507.完美数/Solution.java
@@ -45,11 +45,14 @@
 // @lc code=start
 class Solution {
     public boolean checkPerfectNumber(int num) {
-        if (num == 1) return false;
+        if (num <= 1) return false;
         int sum = 1;
-        int j = num / 2;
+        int j = (int) Math.sqrt(num);
         for (int i = 2; i <= j; i++) {
-            if (num % i == 0) sum += i;
+            if (num % i == 0) {
+                sum += i;
+                sum += num / i;
+            }
         }
 
         return sum == num;
@@ -61,3 +64,8 @@ class Solution {
 // 156/156 cases passed (2120 ms)
 // Your runtime beats 5.06 % of java submissions
 // Your memory usage beats 9.09 % of java submissions (36.8 MB)
+
+// Accepted
+// 156/156 cases passed (2 ms)
+// Your runtime beats 75.97 % of java submissions
+// Your memory usage beats 9.09 % of java submissions (36.9 MB)
