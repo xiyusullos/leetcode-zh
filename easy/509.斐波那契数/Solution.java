@@ -1,7 +1,10 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * @Author: aponder
  * @Date: 2020-05-21 08:49:28
- * @LastEditTime: 2020-05-21 08:50:49
+ * @LastEditTime: 2020-05-21 09:19:16
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/509.斐波那契数/Solution.java
@@ -64,10 +67,27 @@
 
 // @lc code=start
 class Solution {
+    Map<Integer, Integer> note = new HashMap<Integer, Integer>(){{
+        put(0, 0);
+        put(1, 1);
+        // put(2, 1);
+        // put(3, 2);
+    }};
     public int fib(int N) {
-        if (N <= 1) return N;
+        Integer val = note.get(N);
+        if (val == null) {            
+            int n2 = fib(N - 2);
+            int n1 = fib(N - 1);
+            
+            val = n1 + n2;
+            note.put(N, val);
+        }
         
-        return fib(N - 1) + fib(N - 2);
+        // System.out.println("F("+N+")="+val);
+        return val;
+    }
+    public static void main(String[] args) {
+        new Solution().fib(5);
     }
 }
 // @lc code=end
@@ -76,3 +96,8 @@ class Solution {
 // 31/31 cases passed (8 ms)
 // Your runtime beats 31.06 % of java submissions
 // Your memory usage beats 5.26 % of java submissions (36.1 MB)
+
+// Accepted
+// 31/31 cases passed (1 ms)
+// Your runtime beats 33.05 % of java submissions
+// Your memory usage beats 5.26 % of java submissions (36.5 MB)
