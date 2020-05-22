@@ -1,11 +1,16 @@
 /*
  * @Author: aponder
  * @Date: 2020-05-22 23:37:00
- * @LastEditTime: 2020-05-22 23:50:19
+ * @LastEditTime: 2020-05-23 01:25:49
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/medium/105.从前序与中序遍历序列构造二叉树/Solution.java
  */ 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 /*
  * @lc app=leetcode.cn id=105 lang=java
  *
@@ -51,40 +56,58 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+    @Override
+    public String toString() {
+        return String.valueOf(val);
+    }
+}
 class Solution {
-    private Map<Integer, Integer> indexMap;
+    // Map<Integer, Integer> preMap;
+    Map<Integer, Integer> inMap;
+    int[] preorder;
+    int[] inorder;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        // 前序遍历 先树根，再左孩子？再右孩子
+        // 中序遍历 先左孩子，再树根，再右孩子
+        int length = preorder.length;
+        if (length == 0) return null;
 
-    public TreeNode myBuildTree(int[] preorder, int[] inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right) {
-        if (preorder_left > preorder_right) {
-            return null;
+        this.preorder = preorder;
+        this.inorder = inorder;
+        // preMap = new HashMap<>(length);
+        inMap = new HashMap<>(length);
+        for (int i = 0; i < length; i++) {
+            // preMap.put(preorder[i], i);
+            inMap.put(inorder[i], i);
         }
-
-        // 前序遍历中的第一个节点就是根节点
-        int preorder_root = preorder_left;
-        // 在中序遍历中定位根节点
-        int inorder_root = indexMap.get(preorder[preorder_root]);
         
-        // 先把根节点建立出来
-        TreeNode root = new TreeNode(preorder[preorder_root]);
-        // 得到左子树中的节点数目
-        int size_left_subtree = inorder_root - inorder_left;
-        // 递归地构造左子树，并连接到根节点
-        // 先序遍历中「从 左边界+1 开始的 size_left_subtree」个元素就对应了中序遍历中「从 左边界 开始到 根节点定位-1」的元素
-        root.left = myBuildTree(preorder, inorder, preorder_left + 1, preorder_left + size_left_subtree, inorder_left, inorder_root - 1);
-        // 递归地构造右子树，并连接到根节点
-        // 先序遍历中「从 左边界+1+左子树节点数目 开始到 右边界」的元素就对应了中序遍历中「从 根节点定位+1 到 右边界」的元素
-        root.right = myBuildTree(preorder, inorder, preorder_left + size_left_subtree + 1, preorder_right, inorder_root + 1, inorder_right);
+        return insert(0, length - 1, 0, length - 1);
+    }
+
+    TreeNode insert(int preI, int preJ, int inI, int inJ) {
+        if (preI > preJ) return null;
+
+        TreeNode root = new TreeNode(preorder[preI]);
+        if (preI == preJ) return root;
+            
+        int inMid = inMap.get(preorder[preI]);
+        int length = inMid - inI;
+        root.left = insert(preI + 1, length + preI, inI, inMid - 1);
+        root.right = insert(length + preI + 1, preJ, inMid + 1, inJ);
+
         return root;
     }
 
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        int n = preorder.length;
-        // 构造哈希映射，帮助我们快速定位根节点
-        indexMap = new HashMap<Integer, Integer>();
-        for (int i = 0; i < n; i++) {
-            indexMap.put(inorder[i], i);
-        }
-        return myBuildTree(preorder, inorder, 0, n - 1, 0, n - 1);
+    public static void main(String[] args) {
+        new Solution().buildTree(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
+        // new Solution().buildTree(new int[]{1,2}, new int[]{2,1});
+        // new Solution().buildTree(new int[]{1,2,3}, new int[]{3,2,1});
+        // new Solution().buildTree(new int[]{1,2,3}, new int[]{2,3,1});
     }
 }
 // @lc code=end
@@ -92,4 +115,4 @@ class Solution {
 // Accepted
 // 203/203 cases passed (3 ms)
 // Your runtime beats 78.73 % of java submissions
-// Your memory usage beats 80 % of java submissions (39.5 MB)
+// Your memory usage beats 83.33 % of java submissions (39.4 MB)
