@@ -1,7 +1,7 @@
 /*
  * @Author: aponder
  * @Date: 2020-05-22 23:08:15
- * @LastEditTime: 2020-05-22 23:23:29
+ * @LastEditTime: 2020-05-22 23:25:31
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/530.二叉搜索树的最小绝对差/Solution.java
@@ -65,7 +65,7 @@
  * }
  */
 class Solution {
-    long previous = Integer.MAX_VALUE;
+    long previous = Integer.MIN_VALUE;
     long minimum = Integer.MAX_VALUE;
     public int getMinimumDifference(TreeNode root) {
         // 中序遍历
@@ -76,7 +76,7 @@ class Solution {
     void inOrder(TreeNode node) {
         if (node != null) {
             inOrder(node.left);
-            minimum = Math.min(minimum, Math.abs(node.val - previous));
+            minimum = Math.min(minimum, node.val - previous);
             previous = node.val;
             inOrder(node.right);
         }
