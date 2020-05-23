@@ -1,11 +1,12 @@
 /*
  * @Author: aponder
  * @Date: 2020-05-23 10:31:06
- * @LastEditTime: 2020-05-23 11:03:30
+ * @LastEditTime: 2020-05-23 11:15:14
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/532.数组中的k-diff数对/Solution.java
  */ 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -85,30 +86,51 @@ class Solution {
     //     return set.size();
     // }
 
-    public int findPairs(int[] nums, int k) {
-        if (k < 0) return 0;
+    // 方法 2
+    // public int findPairs(int[] nums, int k) {
+    //     if (k < 0) return 0;
         
-        int length = nums.length;
-        // <num, count>
-        Map<Integer, Integer> map = new HashMap<>(length);
-        for (int num : nums) {
-            map.put(num, 1 + map.getOrDefault(num, 0));
-        }
-        if (k == 0) {
-            int count = 0;
-            for (int key : map.keySet()) {
-                if (map.get(key) > 1) count++;
+    //     int length = nums.length;
+    //     // <num, count>
+    //     Map<Integer, Integer> map = new HashMap<>(length);
+    //     for (int num : nums) {
+    //         map.put(num, 1 + map.getOrDefault(num, 0));
+    //     }
+    //     if (k == 0) {
+    //         int count = 0;
+    //         for (int key : map.keySet()) {
+    //             if (map.get(key) > 1) count++;
+    //         }
+    //         return count;
+    //     }
+
+    //     Set<Integer> set = new HashSet<>(length);
+    //     for (int key : map.keySet()) {
+    //         if (map.containsKey(key + k)) set.add(key);
+    //         if (map.containsKey(key - k)) set.add(key - k);
+    //     }
+
+    //     return set.size();
+    // }
+
+    // 方法 3
+    public int findPairs(int[] nums, int k) {
+        Arrays.sort(nums);
+        int count = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] - nums[i] != k) continue;
+                else {
+                    count++;
+                    break;
+                }
             }
-            return count;
+            while (i < nums.length - 1 && nums[i + 1] == nums[i]) {
+                i++;
+            }
         }
 
-        Set<Integer> set = new HashSet<>(length);
-        for (int key : map.keySet()) {
-            if (map.containsKey(key + k)) set.add(key);
-            if (map.containsKey(key - k)) set.add(key - k);
-        }
-
-        return set.size();
+        return count;
     }
 
     public static void main(String[] args) {
@@ -128,3 +150,9 @@ class Solution {
 // 72/72 cases passed (16 ms)
 // Your runtime beats 47.92 % of java submissions
 // Your memory usage beats 14.29 % of java submissions (40.7 MB)
+
+// 方法 3
+// Accepted
+// 72/72 cases passed (253 ms)
+// Your runtime beats 25.66 % of java submissions
+// Your memory usage beats 85.71 % of java submissions (39.7 MB)
