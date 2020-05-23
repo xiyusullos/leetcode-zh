@@ -1,7 +1,7 @@
 /*
  * @Author: aponder
  * @Date: 2020-05-23 11:16:02
- * @LastEditTime: 2020-05-23 11:49:22
+ * @LastEditTime: 2020-05-23 12:33:28
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/538.把二叉搜索树转换为累加树/Solution.java
@@ -60,67 +60,60 @@ import java.util.List;
  * }
  */
 class Solution {
-    // public TreeNode convertBST(TreeNode root) {
-    //     convertRight(root);
-    //     convertLeft(root);
-
-    //     return root;
-    // }
-
-    // int convertRight(TreeNode node) {
-    //     if (node == null) return 0;
-
-    //     node.val += convertRight(node.right);
-    //     return node.val;
-    // }
-
-    // void convertLeft(TreeNode node) {
-    //     if (node != null && node.left != null) {   
-    //         TreeNode leftChild = node.left;
-    //         leftChild.val += node.val + (leftChild.right != null ? leftChild.right.val : 0);
-
-    //         if (node.left.right != null) {
-    //             node.left.right.val += node.val;
-    //         }
-
-    //         convertLeft(leftChild);
-    //     }
-    // }
-
-    List<Integer> list = new ArrayList<>();
+    // 方法 2
+    int previous = 0;
     public TreeNode convertBST(TreeNode root) {
-        preOrder1(root);
-        accumalate();
-        preOrder2(root);
+        if (root != null) {
+            convertBST(root.right);
+            root.val += previous;
+            previous = root.val;
+            convertBST(root.left);
+        }
         return root;
     }
 
-    void preOrder1(TreeNode node) {
-        if (node != null) {
-            preOrder1(node.left);
-            list.add(node.val);
-            preOrder1(node.right);
-        }
-    }
+    // 方法 1
+    // List<Integer> list = new ArrayList<>();
+    // public TreeNode convertBST(TreeNode root) {
+    //     preOrder1(root);
+    //     accumalate();
+    //     preOrder2(root);
+    //     return root;
+    // }
 
-    void accumalate() {
-        for (int i = list.size() - 2; i > -1; i--) {
-            list.set(i, list.get(i) + list.get(i + 1));
-        }
-    }
+    // void preOrder1(TreeNode node) {
+    //     if (node != null) {
+    //         preOrder1(node.left);
+    //         list.add(node.val);
+    //         preOrder1(node.right);
+    //     }
+    // }
 
-    int i = 0;
-    void preOrder2(TreeNode node) {
-        if (node != null) {
-            preOrder2(node.left);
-            node.val = list.get(i++);
-            preOrder2(node.right);
-        }
-    }
+    // void accumalate() {
+    //     for (int i = list.size() - 2; i > -1; i--) {
+    //         list.set(i, list.get(i) + list.get(i + 1));
+    //     }
+    // }
+
+    // int i = 0;
+    // void preOrder2(TreeNode node) {
+    //     if (node != null) {
+    //         preOrder2(node.left);
+    //         node.val = list.get(i++);
+    //         preOrder2(node.right);
+    //     }
+    // }
 }
 // @lc code=end
 
+// 方法1
 // Accepted
 // 212/212 cases passed (3 ms)
 // Your runtime beats 12.75 % of java submissions
 // Your memory usage beats 80 % of java submissions (39.7 MB)
+
+// 方法 2
+// Accepted
+// 212/212 cases passed (1 ms)
+// Your runtime beats 99.11 % of java submissions
+// Your memory usage beats 80 % of java submissions (39.8 MB)
