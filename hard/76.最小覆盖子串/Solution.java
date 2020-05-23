@@ -1,3 +1,11 @@
+/*
+ * @Author: aponder
+ * @Date: 2020-05-23 23:12:47
+ * @LastEditTime: 2020-05-23 23:32:57
+ * @LastEditors: aponder
+ * @Description: 
+ * @FilePath: /leetcode-zh/hard/76.最小覆盖子串/Solution.java
+ */ 
 import java.util.HashSet;
 import java.util.Set;
 
@@ -111,3 +119,7 @@ class Solution {
 }
 // @lc code=end
 
+// Accepted
+// 268/268 cases passed (140 ms)
+// Your runtime beats 7.38 % of java submissions
+// Your memory usage beats 6.67 % of java submissions (40.7 MB)
