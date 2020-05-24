@@ -1,7 +1,9 @@
+import java.util.Stack;
+
 /*
  * @Author: aponder
  * @Date: 2020-05-24 21:44:28
- * @LastEditTime: 2020-05-24 21:49:30
+ * @LastEditTime: 2020-05-24 21:54:49
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/557.反转字符串中的单词-iii/Solution.java
@@ -36,20 +38,43 @@
 
 // @lc code=start
 class Solution {
+    // 方法 1
+    // public String reverseWords(String s) {
+    //     StringBuilder result = new StringBuilder();
+    //     StringBuilder word = new StringBuilder();
+    //     for (char c : s.toCharArray()) {
+    //         if (c == ' ') {
+    //             result.append(word.reverse()).append(c);
+    //             word = new StringBuilder();
+    //         } else {
+    //             word.append(c);
+    //         }
+    //     }
+
+    //     result.append(word.reverse());
+    //     return result.toString();
+    // }
+
+    // 方法 2
     public String reverseWords(String s) {
-        StringBuilder result = new StringBuilder();
-        StringBuilder word = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
         for (char c : s.toCharArray()) {
             if (c == ' ') {
-                result.append(word.reverse()).append(c);
-                word = new StringBuilder();
+                while (!stack.empty()) {
+                    sb.append(stack.pop());
+                }
+                sb.append(' ');
             } else {
-                word.append(c);
-            }
+                stack.push(c);
+            }   
         }
 
-        result.append(word.reverse());
-        return result.toString();
+        while (!stack.empty()) {
+            sb.append(stack.pop());
+        }
+
+        return sb.toString();
     }
 }
 // @lc code=end
@@ -58,3 +83,8 @@ class Solution {
 // 30/30 cases passed (10 ms)
 // Your runtime beats 41.67 % of java submissions
 // Your memory usage beats 5 % of java submissions (40.7 MB)
+
+// Accepted
+// 30/30 cases passed (29 ms)
+// Your runtime beats 15.72 % of java submissions
+// Your memory usage beats 5 % of java submissions (40.6 MB)
