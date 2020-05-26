@@ -1,7 +1,7 @@
 /*
  * @Author: aponder
  * @Date: 2020-05-26 23:46:47
- * @LastEditTime: 2020-05-26 23:55:06
+ * @LastEditTime: 2020-05-26 23:58:37
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/566.重塑矩阵/Solution.java
@@ -77,14 +77,22 @@ class Solution {
         if (n * m != l) return nums;
 
         int p = 0;
+        int i_ = 0;
+        int j_ = 0;
         // 13 -> 4x5 -> 10/5, 3
         int[][] newNums = new int[r][c];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                int j_ = p % c;
-                int i_ = (p - j_) / c;
+                i_ += j_ / c;
+                j_ %= c;
                 newNums[i_][j_] =  nums[i][j];
-                p++;
+                // p++;
+                j_++;
+
+                // int j_ = p % c;
+                // int i_ = (p - j_) / c;
+                // newNums[i_][j_] =  nums[i][j];
+                // p++;
             }
         }
 
