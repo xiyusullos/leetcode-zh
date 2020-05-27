@@ -1,7 +1,7 @@
 /*
  * @Author: aponder
  * @Date: 2020-05-27 23:53:59
- * @LastEditTime: 2020-05-27 23:59:21
+ * @LastEditTime: 2020-05-28 00:00:44
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/easy/581.最短无序连续子数组/Solution.java
@@ -46,32 +46,34 @@ import java.util.Arrays;
 
 // @lc code=start
 class Solution {
-    // public int findUnsortedSubarray(int[] nums) {
-    //     int[] nums_ = nums.clone();
-    //     Arrays.sort(nums_);
-    //     int l = nums.length;
-    //     int start = 0, end = l - 1;
-    //     for (int i = 0; i < l; i++) {
-    //         if (nums[i] == nums_[i]) start++;
-    //         else break;
-    //     }
-    //     for (int i = l - 1; i > start; i--) {
-    //         if (nums[i] == nums_[i]) start++;
-    //         else break;
-    //     }
-    // }
     public int findUnsortedSubarray(int[] nums) {
-        int[] snums = nums.clone();
-        Arrays.sort(snums);
-        int start = snums.length, end = 0;
-        for (int i = 0; i < snums.length; i++) {
-            if (snums[i] != nums[i]) {
-                start = Math.min(start, i);
-                end = Math.max(end, i);
-            }
+        int[] nums_ = nums.clone();
+        Arrays.sort(nums_);
+        int l = nums.length;
+        int start = 0, end = l - 1;
+        for (int i = 0; i < l; i++) {
+            if (nums[i] == nums_[i]) start++;
+            else break;
         }
-        return (end - start >= 0 ? end - start + 1 : 0);
+        for (int i = l - 1; i > start; i--) {
+            if (nums[i] == nums_[i]) end--;
+            else break;
+        }
+
+        return end - start + 1;
     }
+    // public int findUnsortedSubarray(int[] nums) {
+    //     int[] snums = nums.clone();
+    //     Arrays.sort(snums);
+    //     int start = snums.length, end = 0;
+    //     for (int i = 0; i < snums.length; i++) {
+    //         if (snums[i] != nums[i]) {
+    //             start = Math.min(start, i);
+    //             end = Math.max(end, i);
+    //         }
+    //     }
+    //     return (end - start >= 0 ? end - start + 1 : 0);
+    // }
 }
 // @lc code=end
 
