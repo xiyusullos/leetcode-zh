@@ -1,7 +1,7 @@
 /*
  * @Author: aponder
  * @Date: 2020-06-03 23:56:03
- * @LastEditTime: 2020-06-03 23:57:17
+ * @LastEditTime: 2020-06-03 23:57:49
  * @LastEditors: aponder
  * @Description: 
  * @FilePath: /leetcode-zh/medium/837.新-21-点/Solution.java
@@ -79,7 +79,7 @@ class Solution {
 }
 // @lc code=end
 
-Accepted
-146/146 cases passed (4 ms)
-Your runtime beats 96.23 % of java submissions
-Your memory usage beats 100 % of java submissions (39.5 MB)
+// Accepted
+// 146/146 cases passed (4 ms)
+// Your runtime beats 96.23 % of java submissions
+// Your memory usage beats 100 % of java submissions (39.5 MB)
